@@ -42,35 +42,34 @@ export class Fanatics {
     if (driver) this.driver = driver;
     else
       this.driver = new Builder().withCapabilities(Capabilities.chrome()).build()
-
-  }
+  };
 
   async navigate(url?: string): Promise<void> {
     if (url) this.driver.get(url)
     else return this.driver.get(this.homepage);
-  }
+  };
 
   async quit(): Promise<void> {
     return this.driver.quit();
-  }
+  };
 
   async getElement(elementBy: By): Promise<WebElement> {
     await this.driver.wait(until.elementLocated(elementBy));
     let element = await this.driver.findElement(elementBy);
     await this.driver.wait(until.elementIsVisible(element));
     return element;
-  }
+  };
 
   async click(elementBy: By): Promise<void> {
     let element = await this.driver.wait(until.elementLocated(elementBy));
     return await element.click();
-  }
+  };
 
   // Logo
   async clicklogo(): Promise<void> {
     await this.navigate('https://fanatics.custhelp.com/')
     return await this.click(this.logo)
-  }
+  };
 
   // NFL tab
   async tabs(): Promise<void> {
@@ -79,7 +78,7 @@ export class Fanatics {
     await this.getElement(this.NYG);
     await this.driver.wait(
       this.click(this.NYG));
-  }
+  };
   // From Lines 84 - 115, it was for login test
   // async openaccount(): Promise<void> {
   //   await this.driver.sleep(4000)
